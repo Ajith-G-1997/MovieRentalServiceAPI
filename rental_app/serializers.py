@@ -4,9 +4,11 @@ from rest_framework.validators import UniqueValidator
 from .models import Movie
 
 class MovieSerializer(serializers.ModelSerializer):
+    PREFIX = "Movie-"
+
     title = serializers.CharField(
-        min_length=1,
-        max_length=50,
+        min_length=len(PREFIX)+2,
+        max_length=len(PREFIX)+2,
         validators=[UniqueValidator(queryset=Movie.objects.all())]
     )
     release_date = serializers.DateField()
